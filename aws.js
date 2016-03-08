@@ -46,7 +46,8 @@ var uploadFiles = function(files) {
             s3.putObject({
                 Bucket: bucketName,
                 Key: file,
-                Body: data
+                Body: data,
+                ContentType: "String"
             }, function(resp) {
                 console.log(file, " saved successfully...");
             });
