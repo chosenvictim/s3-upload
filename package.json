@@ -1,0 +1,29 @@
+{
+  "name": "s3-upload",
+  "version": "1.0.0",
+  "description": "Utility to upload-download files/folders to AWS-S3",
+  "main": "aws.js",
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/shek8034/s3-upload.git"
+  }
+  "dependencies": {
+    "aws-sdk": "^2.2.41",
+    "path": "^0.12.7",
+    "fs": "^0.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "S3",
+    "AWS SDK",
+    "list S3 buckets",
+    "get S3 bucket Policy",
+    "upload files to AWS S3",
+    "download files from AWS S3"
+  ],
+  "author": "Shekhar Kumar",
+  "license": "ISC"
+}
