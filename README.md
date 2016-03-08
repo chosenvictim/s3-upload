@@ -1,4 +1,4 @@
-#A Utility to upload/download/listBuckets/getBucketPolicy to AWS-S3
+#A Utility to Upload, Download, List Buckets and Get Bucket Policy to AWS-S3 Bucket
 
 A very simple utility to upload/download files or folders to Amazon S3 bucket.
 
