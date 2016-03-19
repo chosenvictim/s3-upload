@@ -2,11 +2,6 @@ var AWS = require('aws-sdk'),
     fs = require('fs'),
     path = require('path');
 
-AWS.config.update = {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-}
-
 var bucketName = process.env.BUCKET;
 
 var s3 = new AWS.S3();
@@ -39,16 +34,22 @@ var getBucketPolicy = function() {
 
 /* PutFile */
 var uploadFiles = function(files) {
-    console.log("Uploading to Bucket: ", bucketName);
+    console.log("Uploading files to Bucket: ", bucketName);
     files.forEach(function(file) {
         fs.readFile(file, function(err, data) {
             if(err) { throw err; }
+            console.log("File to be uploaded: ", file);
             s3.putObject({
                 Bucket: bucketName,
                 Key: file,
                 Body: data,
-                ContentType: "String"
-            }, function(resp) {
+                ContentType: "text/html"
+            }, function(err, url) {
+                if(err) {
+                    console.log(err);
+                    throw err;
+                }
+                console.log(url);
                 console.log(file, " saved successfully...");
             });
         });
@@ -63,7 +64,10 @@ var downloadFiles = function(files) {
             Bucket: bucketName,
             Key: file
         }, function(err, data) {
-            if(err) { throw err; }
+            if(err) {
+                console.log(err);
+                throw err;
+            }
             console.log(file, " fetched successfully............................................................");
             console.log(data.Body.toString('utf-8'));
             console.log('.......................................................................................');
@@ -97,6 +101,7 @@ var traverseDirectory = function(dir, done) {
 }
 
 var motive = process.env.MOTIVE;
+
 if(motive === 'up') {
     traverseDirectory(process.env.START_DIR, function(err, results) {
          if(err) { throw err; }
